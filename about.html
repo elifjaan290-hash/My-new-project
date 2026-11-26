@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Software House</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* --- Same Theme Variables --- */
+        :root {
+            --bg-main: #0b1120;
+            --bg-secondary: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --primary-color: #38bdf8;
+            --secondary-color: #818cf8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        /* --- Navbar CSS --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-secondary);
+            padding: 16px 6%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .brand h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .btn-contact {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff !important;
+            padding: 9px 22px;
+            border-radius: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-contact::after {
+            display: none;
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);
+        }
+
+        /* --- About Page Header --- */
+        .page-header {
+            text-align: center;
+            padding: 70px 6% 40px;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 60%);
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* --- Story & Stats Section --- */
+        .about-story {
+            padding: 60px 6%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .story-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .story-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background-color: var(--bg-secondary);
+            padding: 20px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .stat-box span {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .story-img img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Core Values / Why Choose Us --- */
+        .values-section {
+            padding: 60px 6% 90px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .value-card {
+            background-color: var(--bg-secondary);
+            padding: 32px 26px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-color);
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* --- Footer CSS --- */
+        .site-footer {
+            background-color: var(--bg-secondary);
+            color: var(--text-muted);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-column h4 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .footer-column p {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-cta {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 900px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .page-header h1 {
+                font-size: 2.1rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="Software House Logo" width="42" height="42">
+            <h3>Software House</h3>
+        </a>
+        <div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="btn-contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <span class="badge-tag">Who We Are</span>
+        <h1>Empowering Businesses With <span>Smart Technology</span></h1>
+        <p>We are a dedicated team of software engineers, designers, and strategists committed to turning bold ideas into reliable digital products.</p>
+    </header>
+
+    <!-- Our Story & Stats -->
+    <section class="about-story">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 story-text">
+                <h2>Our Story & Mission</h2>
+                <p>Founded with a vision to bridge the gap between complex technology and everyday business needs, our software house has grown into a trusted technology partner for startups and enterprises alike.</p>
+                <p>Our mission is simple: write clean code, design intuitive user experiences, and deliver scalable software solutions that help our clients grow faster in the digital age.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h3>50+</h3>
+                        <span>Projects Delivered</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>30+</h3>
+                        <span>Happy Clients</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>99%</h3>
+                        <span>Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 story-img">
+                <img src="image1.png" alt="Our Development Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="values-section">
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>What sets our team apart when building your next big project</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">01</div>
+                    <h4>Expert Engineering</h4>
+                    <p>Our developers stay up to date with modern frameworks and best practices to build fast, secure, and maintainable applications.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">02</div>
+                    <h4>User-First Design</h4>
+                    <p>We focus on clean, intuitive interfaces so your customers enjoy a seamless experience on both desktop and mobile devices.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-icon">03</div>
+                    <h4>Transparent Process</h4>
+                    <p>From initial planning to final deployment, we keep you updated at every milestone with clear timelines and honest communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <h3>Software House</h3>
+                    <p>Building scalable web, mobile, and AI solutions. We turn complex business challenges into seamless digital experiences.</p>
+                </div>
+                <div class="col-lg-2 col-md-6 footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Web Development</a></li>
+                        <li><a href="services.html">Mobile App Development</a></li>
+                        <li><a href="services.html">UI/UX Design</a></li>
+                        <li><a href="services.html">Cloud & DevOps</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Stay Connected</h4>
+                    <p>Have a project in mind? Let's collaborate and build something extraordinary together.</p>
+                    <a href="contact.html" class="footer-cta">Get in touch &rarr;</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Software House. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
